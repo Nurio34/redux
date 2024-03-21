@@ -1,17 +1,16 @@
 import { Route, Routes, useLocation } from "react-router-dom";
-import Home from "../../1-Pages/1-Home";
-import Cart from "../../1-Pages/2-Cart";
+import Home from "../Pages/Home";
+import Cart from "../Pages/Cart";
 
-function index() {
+function Main() {
     return (
         <main>
             <Routes>
                 <Route path="/" element={<Home />} />
-
                 <Route path="/cart" element={<Cart />} />
             </Routes>
         </main>
     );
 }
 
-export default index;
+export default Main;

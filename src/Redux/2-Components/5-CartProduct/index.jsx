@@ -1,9 +1,28 @@
 import { connect } from "react-redux";
-import { Decrease, Increase, Remove_Cart } from "../../3-Hooks/actions";
+import {
+    Amount,
+    Decrease,
+    Increase,
+    Price,
+    Remove_Cart,
+} from "../../3-Hooks/actions";
 import { FaChevronUp, FaChevronDown } from "react-icons/fa";
+import { useEffect } from "react";
 
-function index({ product, removeCart, increase, decrease }) {
+function index({
+    product,
+    removeCart,
+    increase,
+    decrease,
+    totalPrice,
+    totalAmount,
+}) {
     const { title, thumbnail, price, amount } = product;
+
+    useEffect(() => {
+        totalPrice();
+        totalAmount();
+    }, [amount]);
 
     return (
         <li
@@ -20,18 +39,33 @@ function index({ product, removeCart, increase, decrease }) {
                 />
                 <p className=" text-end">${price}</p>
                 <button
-                    className=" text-center py-1 px-4 bg-green-500 text-white rounded-md hover:scale-105 hover:bg-green-300 hover:font-semibold hover:text-black active:scale-100 active:bg-green-500"
-                    onClick={() => removeCart()}
+                    className=" text-center py-1 px-4 bg-red-500 text-white rounded-md hover:scale-105 hover:bg-red-300 hover:font-semibold hover:text-black active:scale-100 active:bg-red-500"
+                    onClick={() => {
+                        removeCart();
+                        totalPrice();
+                        totalAmount();
+                    }}
                 >
                     Remove
                 </button>
             </div>
             <div className="grid gap-4 justify-center">
-                <button onClick={() => increase()}>
+                <button
+                    onClick={() => {
+                        increase();
+                    }}
+                >
                     <FaChevronUp />
                 </button>
                 <p className="text-center">{amount}</p>
-                <button onClick={amount === 1 ? removeCart : decrease}>
+                <button
+                    onClick={() => {
+                        decrease();
+                    }}
+                    className={`${
+                        amount === 1 && "text-gray-400 pointer-events-none"
+                    } `}
+                >
                     <FaChevronDown />
                 </button>
             </div>
@@ -46,6 +80,8 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         removeCart: () => dispatch({ type: Remove_Cart, payload: { id } }),
         increase: () => dispatch({ type: Increase, payload: { id } }),
         decrease: () => dispatch({ type: Decrease, payload: { id } }),
+        totalPrice: () => dispatch({ type: Price }),
+        totalAmount: () => dispatch({ type: Amount }),
     };
 };
 

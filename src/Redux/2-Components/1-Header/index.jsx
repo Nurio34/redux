@@ -6,14 +6,14 @@ function index() {
     return (
         <header className=" flex items-center justify-between py-[4vh] px-[10vw] ş">
             <Link
-                to="/"
+                to="/redux"
                 className=" font-extrabold text-2xl capitalize"
                 style={{ fontVariant: "small-caps" }}
             >
                 redux
             </Link>
 
-            <Link to="/cart" className="flex relative ">
+            <Link to="/redux/cart" className="flex relative ">
                 <FaShoppingCart size={24} />
                 <CartItems />
             </Link>

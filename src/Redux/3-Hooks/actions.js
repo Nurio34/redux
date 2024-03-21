@@ -3,3 +3,5 @@ export const Add_Cart = "Add_Cart";
 export const Remove_Cart = "Remove_Cart";
 export const Increase = "Increase";
 export const Decrease = "Decrease";
+export const Price = "Price";
+export const Amount = "Amount";
